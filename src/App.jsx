@@ -2,6 +2,7 @@ import Map from "./feature/map/map.component";
 import Menu from "./feature/menu/menu.component";
 import React, {useCallback, useState} from 'react';
 import './App.css';
+import ActivitiesList from "./feature/activitiesList/activitiesList.component";
 
 export const Markers = React.createContext({activeMarkers: [], updateMarkers: () => {}});
 
@@ -12,6 +13,7 @@ const App = () => {
     <Markers.Provider value={{activeMarkers, updateMarkers}}>
       <div className={'App'}>
         <Menu/>
+        <ActivitiesList/>
         <Map/>
       </div>
     </Markers.Provider>

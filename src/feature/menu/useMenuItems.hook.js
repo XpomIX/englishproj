@@ -1,17 +1,23 @@
 import {useCallback, useContext, useEffect, useState} from "react";
 import {Markers} from "../../App";
+import {markers} from "../../markers";
+import {categories} from "../../categories";
 
-const categories = [
-  {title: 'To eat', position: [57.15943164550077, 65.52244595081531]},
-  {title: 'To money', position: [57.158764697238176, 65.5251221617048]},
-  {title: 'To russian', position: [57.15833170843232, 65.52698875221336]}
-]
 const useMenuItems = () => {
   const [selected, setSelected] = useState(new Set());
   const {updateMarkers} = useContext(Markers);
 
   useEffect(() => {
-    updateMarkers(categories.filter((item) => selected.has(item.title)));
+    const newMarkers = markers.filter(({criteria}) => {
+      let everyThingFound = true;
+      selected.forEach((value) => {
+        if (criteria.indexOf(value) === -1) {
+          everyThingFound = false;
+        }
+      });
+      return everyThingFound
+    });
+    updateMarkers(newMarkers);
   }, [selected, updateMarkers]);
 
   const onClickMenuItem = useCallback((id) => {
@@ -22,7 +28,7 @@ const useMenuItems = () => {
       newSelected.add(id);
     }
     setSelected(newSelected)
-  }, [selected])
+  }, [selected]);
 
   return {
     categories,
