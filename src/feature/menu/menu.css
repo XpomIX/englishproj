@@ -1,7 +1,7 @@
 .menu {
     width: 20%;
-    min-width: 200px;
-    max-width: 300px;
+    min-width: 250px;
+    max-width: 350px;
     height: 100vh;
     background: #ffffff;
     flex-shrink: 0;
@@ -9,4 +9,18 @@
     border-right: solid 2px #a9a9a9;
     padding: 20px;
     box-sizing: border-box;
+}
+.menu-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.menu-content-item {
+    padding: 8px;
+    border-radius: 50vh;
+    text-align: center;
+    width: fit-content;
+    margin: 3px;
+    cursor: pointer;
+    transition: 0.1s;
 }

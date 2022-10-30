@@ -10,3 +10,14 @@
     padding: 20px;
     box-sizing: border-box;
 }
+.activities-list-item {
+    border-radius: 5px;
+    margin-bottom: 20px;
+    padding: 6px;
+    cursor: pointer;
+    transition: 0.1s;
+}
+.activities-list-item__title {
+    font-size: 18px;
+    font-weight: bold;
+}

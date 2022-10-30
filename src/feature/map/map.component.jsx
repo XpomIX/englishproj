@@ -1,18 +1,13 @@
 import './map.css';
 import {MapContainer, Marker, TileLayer} from "react-leaflet";
-import {useContext, useMemo} from "react";
-import {Markers} from "../../App";
+import {useMemo} from "react";
 
-const Map = () => {
-  const {activeMarkers} = useContext(Markers);
-  const renderMarkers = useMemo(() => (
-    <>
-      {activeMarkers.map(({title, position, icon}) => (
-        <Marker position={position} icon={icon} key={`marker_${title}`}>
-        </Marker>
-      ))}
-    </>
-  ), [activeMarkers]);
+const Map = ({activeMarkers}) => {
+  const renderMarkers = useMemo(() => (activeMarkers.map(({title, position, icon}) => (
+    <Marker position={position} icon={icon} key={`marker_${title}`}>
+    </Marker>
+  ))), [activeMarkers]);
+
   return (
     <MapContainer center={[57.1553, 65.5619]} zoom={12}>
       <TileLayer
