@@ -22,6 +22,7 @@ const App = () => {
   const [gender, setGender] = useState(undefined);
   const [age, setAge] = useState(undefined);
   const [activity, setActivity] = useState(undefined);
+  const [isChoiceOpen, setIsChoiceOpen] = useState(true);
 
   const updateHoverMarkerId = useCallback((id) => {setHoverMarkerId(id)}, []);
   const onChangeCategory = useCallback((category) => {
@@ -49,29 +50,17 @@ const App = () => {
   }, [selected, activity, age, gender])
 
   const resetInitialSettings = useCallback(() => {
+    setIsChoiceOpen(true);
     setGender(undefined);
     setActivity(undefined);
     setAge(undefined);
   }, [])
 
-  if(gender === undefined) {
-    return (
-      <SelectGenderPage selectGender={setGender}/>
-    )
-  }
-  if(age === undefined) {
-    return (
-      <SelectAgePage selectAge={setAge} gender={gender}/>
-    )
-  }
-  if(activity === undefined) {
-    return (
-      <SelectActivityPage selectActivity={setActivity}/>
-    )
-  }
-
   return (
     <Markers.Provider value={{hoverMarkerId, updateHoverMarkerId, selected, onChangeCategory}}>
+      {gender === undefined ? <SelectGenderPage selectGender={setGender}/> :
+      age === undefined ? <SelectAgePage selectAge={setAge} gender={gender}/> :
+      isChoiceOpen ? <SelectActivityPage selectActivity={setActivity} setIsChoiceOpen={(open) => {setIsChoiceOpen(open)}}/> : ''}
       <div className={'App'}>
         <Menu resetInitial={resetInitialSettings} initSettings={{age, gender, activity}}/>
         <ActivitiesList activeMarkers={activeMarkers}/>

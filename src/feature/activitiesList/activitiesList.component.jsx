@@ -28,7 +28,7 @@ const ActivitiesList = ({activeMarkers}) => {
       <Typography variant="h5" gutterBottom>
         Activities by criteria ({renderItems.length})
       </Typography>
-      {renderItems}
+      {renderItems.length ? renderItems : 'Available places is not found'}
     </div>
   )
 }
