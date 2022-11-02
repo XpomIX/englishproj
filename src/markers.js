@@ -21,7 +21,7 @@ export const markers = [
       'https://avatars.mds.yandex.net/get-altay/5584259/2a0000017d9496e30e67829010f1284bc558/XXXL',
       'https://avatars.mds.yandex.net/get-altay/4802381/2a0000017b9e720b8956264c436d83958036/XXXL'
     ],
-    criteria: ['patric'],
+    criteria: ['patric', 'live-music'],
     description: 'Borsch is the most popular restaurant with a low price and nice design.',
     position: [57.15881776421832,65.52485545136237],
     icon: patrickIcon
