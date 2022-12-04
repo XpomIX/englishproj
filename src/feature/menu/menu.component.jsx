@@ -4,7 +4,6 @@ import {IconButton, Typography} from "@mui/material";
 import {useContext, useMemo} from "react";
 import {Markers} from "../../App";
 import {categories} from "../../categories";
-import {activityOptions, ageIconsOptions, genderOptions} from "../initialSelectPages/options";
 import RestartAltIcon from '@mui/icons-material/RestartAlt';
 
 const Menu = ({resetInitial, initSettings}) => {
@@ -26,21 +25,15 @@ const Menu = ({resetInitial, initSettings}) => {
     ))
   ), [selected, onChangeCategory]);
 
-  const gender = useMemo(() => {
-    if (initSettings.gender === '') {return `Doesn't matter`}
-    return (initSettings.gender === 'man' ? genderOptions.man : genderOptions.woman)
-  }, [initSettings])
-  const age = useMemo(() => {
-    const {age, gender} = initSettings;
-    if (age === '') {return `Doesn't matter`}
-    if (age === 'child') {return ageIconsOptions[0].man}
-    if (age === 'middle-age') {return gender === 'man' ? ageIconsOptions[1].man : ageIconsOptions[1].woman}
-    if (age === 'old') {return gender === 'man' ? ageIconsOptions[2].man : ageIconsOptions[2].woman}
-  }, [initSettings])
-  const activity = useMemo(() => {
-    if (initSettings.activity === '') {return `Doesn't matter`}
-    return (initSettings.activity === 'food' ? activityOptions.food : activityOptions.entertainment)
-  }, [initSettings])
+  const initSettingsRender = useMemo(() => {
+    let result = [];
+    for (let key in initSettings) {
+      result = [...result, <div style={{display: "flex", textTransform: 'capitalize', }}>{key}: <div style={{fontWeight: 'bold', marginLeft: '3px'}}>
+        {initSettings[key] !== '' ? initSettings[key] : "doesn't matter"}
+      </div></div>]
+    }
+    return <>{result.map((item) => item)}</>
+  }, [initSettings]);
 
   return (
     <div className={'menu'}>
@@ -48,9 +41,7 @@ const Menu = ({resetInitial, initSettings}) => {
         Initial settings <IconButton onClick={() => resetInitial()}><RestartAltIcon/></IconButton>
       </Typography>
       <div className={'menu-content emoji'} style={{flexDirection: 'column'}}>
-        <div style={{display: "flex"}}>Gender: <div style={{fontWeight: 'bold', marginLeft: '3px'}}>{gender}</div></div>
-        <div style={{display: "flex"}}>Age: <div style={{fontWeight: 'bold', marginLeft: '3px'}}>{age}</div></div>
-        <div style={{display: "flex"}}>Activity: <div style={{fontWeight: 'bold', marginLeft: '3px'}}>{activity}</div></div>
+        {initSettingsRender}
       </div>
       <div style={{width: '100%', marginTop: '25px'}}></div>
       <Typography variant="h5" gutterBottom>

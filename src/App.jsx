@@ -6,7 +6,10 @@ import ActivitiesList from "./feature/activitiesList/activitiesList.component";
 import {markers} from "./markers";
 import SelectAgePage from "./feature/initialSelectPages/selectAgePage.component";
 import SelectActivityPage from "./feature/initialSelectPages/selectActivityPage.component";
-import SelectGenderPage from "./feature/initialSelectPages/selectGenderPage.component";
+import SelectWhenPage from "./feature/initialSelectPages/selectWhenPage.component";
+import SelectCategoryPage from "./feature/initialSelectPages/selectCategoryPage.component";
+import SelectWherePage from "./feature/initialSelectPages/selectWherePage.component";
+import SelectCompanyPage from "./feature/initialSelectPages/selectCompanyPage.component";
 
 export const Markers = React.createContext({
   hoverMarkerId: '',
@@ -19,9 +22,12 @@ const App = () => {
   const [hoverMarkerId, setHoverMarkerId] = useState('');
   const [selected, setSelected] = useState(new Set());
 
-  const [gender, setGender] = useState(undefined);
   const [age, setAge] = useState(undefined);
   const [activity, setActivity] = useState(undefined);
+  const [category, setCategory] = useState(undefined);
+  const [company, setCompany] = useState(undefined);
+  const [when, setWhen] = useState(undefined);
+  const [where, setWhere] = useState(undefined);
   const [isChoiceOpen, setIsChoiceOpen] = useState(true);
 
   const updateHoverMarkerId = useCallback((id) => {setHoverMarkerId(id)}, []);
@@ -36,7 +42,7 @@ const App = () => {
   }, [selected, setSelected])
 
   const activeMarkers = useMemo(() => {
-    const selectedWithOtherParams = new Set([...selected, ...[age, gender, activity].filter((item) => item !== '')]);
+    const selectedWithOtherParams = new Set([...selected, ...[age, activity, category, when, where, company].filter((item) => item !== '')]);
 
     return markers.filter(({criteria}) => {
       let everyThingFound = true;
@@ -47,22 +53,27 @@ const App = () => {
       });
       return everyThingFound
     })
-  }, [selected, activity, age, gender])
+  }, [selected, activity, age, when, where, category, company])
 
   const resetInitialSettings = useCallback(() => {
     setIsChoiceOpen(true);
-    setGender(undefined);
     setActivity(undefined);
+    setCategory(undefined);
+    setWhen(undefined);
+    setWhere(undefined);
     setAge(undefined);
   }, [])
 
   return (
     <Markers.Provider value={{hoverMarkerId, updateHoverMarkerId, selected, onChangeCategory}}>
-      {gender === undefined ? <SelectGenderPage selectGender={setGender}/> :
-      age === undefined ? <SelectAgePage selectAge={setAge} gender={gender}/> :
+      {age === undefined ? <SelectAgePage selectAge={setAge}/> :
+      company === undefined ? <SelectCompanyPage selectCompany={setCompany}/> :
+      when === undefined ? <SelectWhenPage selectWhen={setWhen}/> :
+      where === undefined ? <SelectWherePage selectWhere={setWhere}/> :
+      category === undefined ? <SelectCategoryPage selectCategory={setCategory}/> :
       isChoiceOpen ? <SelectActivityPage selectActivity={setActivity} setIsChoiceOpen={(open) => {setIsChoiceOpen(open)}}/> : ''}
       <div className={'App'}>
-        <Menu resetInitial={resetInitialSettings} initSettings={{age, gender, activity}}/>
+        <Menu resetInitial={resetInitialSettings} initSettings={{age, company, when, where, category, activity}}/>
         <ActivitiesList activeMarkers={activeMarkers}/>
         <Map activeMarkers={activeMarkers}/>
       </div>

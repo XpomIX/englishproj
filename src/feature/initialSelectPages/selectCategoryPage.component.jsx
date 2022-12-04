@@ -1,10 +1,10 @@
 import './initialSelect.css';
-import {useCallback, useEffect, useState} from "react";
-import {options} from "./options";
+import {useCallback, useEffect, useMemo, useState} from "react";
+import {ageIconsOptions, options} from "./options";
 import './card.css';
 import Card from "./card.component";
 
-const SelectAgePage = ({selectAge}) => {
+const SelectCategoryPage = ({selectCategory}) => {
   const [appear, setAppear] = useState(false);
   const [buttonsActive, setButtonsActive] = useState(true);
 
@@ -14,15 +14,15 @@ const SelectAgePage = ({selectAge}) => {
     }, 1);
   }, [])
 
-  const onClickHandle = useCallback((age) => () => {
+  const onClickHandle = useCallback((gender) => () => {
     if (buttonsActive) {
       setButtonsActive(false);
       setAppear(false);
       setTimeout(() => {
-        selectAge(age)
+        selectCategory(gender)
       }, 300);
     }
-  }, [selectAge, buttonsActive])
+  }, [selectCategory, buttonsActive])
 
   return (
     <div className={'page'}>
@@ -37,22 +37,22 @@ const SelectAgePage = ({selectAge}) => {
         }}
       >
         <Card
-          onClick={onClickHandle(options.age.kids.title)}
-          title={options.age.kids.title}
-          imageUrl={options.age.kids.imgUrl}
-          backgroundColor={options.age.kids.bgColor}
+          onClick={onClickHandle(options.category.withChildren.title)}
+          title={options.category.withChildren.title}
+          imageUrl={options.category.withChildren.imgUrl}
+          backgroundColor={options.category.withChildren.bgColor}
           appear={appear}
         />
         <Card
-          onClick={onClickHandle(options.age.elderly.title)}
-          title={options.age.elderly.title}
-          imageUrl={options.age.elderly.imgUrl}
-          backgroundColor={options.age.elderly.bgColor}
+          onClick={onClickHandle(options.category.withPets.title)}
+          title={options.category.withPets.title}
+          imageUrl={options.category.withPets.imgUrl}
+          backgroundColor={options.category.withPets.bgColor}
           appear={appear}
         />
       </div>
       <div style={{background: 'orange'}} className={`card-title ${appear ? 'card-title--appeared' : ''}`}>
-        {options.age.title}
+        {options.category.title}
       </div>
       <div
         style={{
@@ -65,17 +65,17 @@ const SelectAgePage = ({selectAge}) => {
         }}
       >
         <Card
-          onClick={onClickHandle(options.age.students.title)}
-          title={options.age.students.title}
-          imageUrl={options.age.students.imgUrl}
-          backgroundColor={options.age.students.bgColor}
+          onClick={onClickHandle(options.category.company.title)}
+          title={options.category.company.title}
+          imageUrl={options.category.company.imgUrl}
+          backgroundColor={options.category.company.bgColor}
           appear={appear}
         />
         <Card
-          onClick={onClickHandle(options.age.middleAge.title)}
-          title={options.age.middleAge.title}
-          imageUrl={options.age.middleAge.imgUrl}
-          backgroundColor={options.age.middleAge.bgColor}
+          onClick={onClickHandle(options.category.alone.title)}
+          title={options.category.alone.title}
+          imageUrl={options.category.alone.imgUrl}
+          backgroundColor={options.category.alone.bgColor}
           appear={appear}
         />
       </div>
@@ -88,4 +88,4 @@ const SelectAgePage = ({selectAge}) => {
     </div>
   )
 }
-export default SelectAgePage;
+export default SelectCategoryPage;
