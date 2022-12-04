@@ -15,7 +15,9 @@ export const Markers = React.createContext({
   hoverMarkerId: '',
   updateHoverMarkerId: () => {},
   selected: new Set(),
-  onChangeCategory: () => {}
+  onChangeCategory: () => {},
+  setMapCenter: ([]) => {},
+  mapCenter: []
 });
 
 const App = () => {
@@ -29,6 +31,12 @@ const App = () => {
   const [when, setWhen] = useState(undefined);
   const [where, setWhere] = useState(undefined);
   const [isChoiceOpen, setIsChoiceOpen] = useState(true);
+
+  const [mapCenter, setMapCenter] = useState([]);
+
+  const changeMapCenter = (center) => {
+    setMapCenter(center);
+  }
 
   const updateHoverMarkerId = useCallback((id) => {setHoverMarkerId(id)}, []);
   const onChangeCategory = useCallback((category) => {
@@ -65,7 +73,7 @@ const App = () => {
   }, [])
 
   return (
-    <Markers.Provider value={{hoverMarkerId, updateHoverMarkerId, selected, onChangeCategory}}>
+    <Markers.Provider value={{hoverMarkerId, updateHoverMarkerId, selected, onChangeCategory, setMapCenter: changeMapCenter, mapCenter}}>
       {age === undefined ? <SelectAgePage selectAge={setAge}/> :
       company === undefined ? <SelectCompanyPage selectCompany={setCompany}/> :
       when === undefined ? <SelectWhenPage selectWhen={setWhen}/> :

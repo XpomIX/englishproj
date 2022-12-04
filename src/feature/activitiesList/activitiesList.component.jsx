@@ -1,23 +1,25 @@
 import './activitiesList.css';
-import {Tooltip, Typography} from "@mui/material";
+import {Box, Button, Rating, Tooltip, Typography} from "@mui/material";
 import {Fragment, useContext, useMemo} from "react";
 import {Markers} from "../../App";
 
 const ActivitiesList = ({activeMarkers}) => {
-  const {hoverMarkerId, updateHoverMarkerId} = useContext(Markers);
+  const {hoverMarkerId, updateHoverMarkerId, setMapCenter} = useContext(Markers);
 
-  const tooltip = (title, description, images) => {
+  const tooltip = (title, description, images, position) => {
       return (
           <Fragment>
-              <img alt={''} src={images[0]} style={{width: '300px', height: '200px'}}/>
-              <div style={{fontSize: '24px'}}>{title}</div>
-              <div style={{fontSize: '20px'}}>{description}</div>
+            <img alt={''} src={images[0]} style={{width: '300px', height: '200px'}}/>
+            <Box><Typography style={{fontSize: '24px'}}>{title}</Typography>
+              <Rating name="half-rating-read" defaultValue={2.5} precision={0.1} readOnly /></Box>
+            <div style={{fontSize: '20px'}}>{description}</div>
+            <Button variant={'contained'} onClick={() => setMapCenter(position)}>See on the map</Button>
           </Fragment>
       )
   }
 
-  const renderItems = useMemo(() => (activeMarkers.map(({title, description, address, images, id}) => (
-      <Tooltip title={tooltip(title, description, images)} placement={'right'}>
+  const renderItems = useMemo(() => (activeMarkers.map(({title, description, address, images, id, position}) => (
+      <Tooltip title={tooltip(title, description, images, position)} placement={'right'}>
           <div
               className={'activities-list-item'}
               onMouseEnter={() => updateHoverMarkerId(id)}

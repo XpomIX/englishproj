@@ -1,6 +1,6 @@
 import 'leaflet/dist/leaflet.css';
 import './menu.css';
-import {IconButton, Typography} from "@mui/material";
+import {Chip, IconButton, Typography} from "@mui/material";
 import {useContext, useMemo} from "react";
 import {Markers} from "../../App";
 import {categories} from "../../categories";
@@ -11,17 +11,13 @@ const Menu = ({resetInitial, initSettings}) => {
 
   const menuItems = useMemo(() => (
     categories.map(({title, criteria}) => (
-      <div
+      <Chip
         onClick={() => onChangeCategory(criteria)}
-        style={{
-          background: selected.has(criteria) ? '#966BD6' : 'rgba(150,107,214,0.49)',
-          color: selected.has(criteria) ? 'white' : 'black'
-        }}
-        className={'menu-content-item'}
         key={`menuItem_${criteria}`}
-      >
-        {title}
-      </div>
+        label={title}
+        color={selected.has(criteria) ? 'secondary' : 'default'}
+        sx={{margin: '3px', fontSize: '16px'}}
+      />
     ))
   ), [selected, onChangeCategory]);
 
