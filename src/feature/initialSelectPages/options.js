@@ -64,7 +64,7 @@ export const options = {
       bgColor: '#3f51b5'
     },
     alone: {
-      title: 'middle age',
+      title: 'alone',
       imgUrl: imgCat4,
       bgColor: '#e8ba02'
     }

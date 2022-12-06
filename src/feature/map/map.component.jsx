@@ -1,5 +1,5 @@
 import './map.css';
-import {MapContainer, Marker, Popup, TileLayer, useMap, useMapEvent, useMapEvents} from "react-leaflet";
+import {MapContainer, Marker, Popup, TileLayer, useMap, useMapEvents} from "react-leaflet";
 import {useCallback, useContext, useEffect, useMemo, useRef} from "react";
 import {Markers} from "../../App";
 import {LatLng} from "leaflet/src/geo";
@@ -7,7 +7,13 @@ import {IconDefault} from "leaflet/src/layer/marker/Icon.Default";
 import iconMarkerImg from '../../markersIcons/marker.svg';
 import iconChosenMarkerImg from '../../markersIcons/markerChosen.svg';
 import {Box, Rating, Typography} from "@mui/material";
-import {Handler} from "leaflet/src/core";
+
+import img1 from '../../restrantsSituation/whatsapp-image-2021-10-11-at-15.03.13-2.jpeg';
+import img2 from '../../restrantsSituation/whatsapp-image-2021-10-11-at-15.08.50-1 (1).jpeg';
+import img3 from '../../restrantsSituation/whatsapp-image-2021-10-11-at-15.08.50-2.jpeg';
+import img4 from '../../restrantsSituation/whatsapp-image-2021-10-11-at-15.08.50-1.jpeg';
+
+const images = [img1, img2, img3, img4];
 
 
 const MyComponent = ({mapCenter, changeMapCenter}) => {
@@ -58,7 +64,7 @@ const Map = ({activeMarkers}) => {
 
   const changeMapCenter = useCallback((center = []) => {setMapCenter(center)}, [])
 
-  const renderMarkers = useMemo(() => (activeMarkers.map(({title, position, address, rating, description}) => (
+  const renderMarkers = useMemo(() => (activeMarkers.map(({title, position, address, rating, description, image}, index) => (
     <Marker
       position={position}
       key={`marker_${title}`}
@@ -66,7 +72,7 @@ const Map = ({activeMarkers}) => {
     >
       <Popup direction="top">
         <div style={{width: '250px'}}>
-          <img alt={''} src={'https://netsh.pp.ua/wp-content/uploads/2017/08/Placeholder-1.png'} style={{width: '100%', height: '200px'}}/>
+          <img alt={''} src={image ? image : images[index % 4]} style={{width: '100%', height: '200px'}}/>
           <Box><Typography style={{fontSize: '24px'}}>{title}</Typography>
             <Box
               sx={{

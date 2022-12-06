@@ -25,7 +25,6 @@ const App = () => {
   const [selected, setSelected] = useState(new Set());
 
   const [age, setAge] = useState(undefined);
-  const [activity, setActivity] = useState(undefined);
   const [category, setCategory] = useState(undefined);
   const [company, setCompany] = useState(undefined);
   const [when, setWhen] = useState(undefined);
@@ -50,7 +49,7 @@ const App = () => {
   }, [selected, setSelected])
 
   const activeMarkers = useMemo(() => {
-    const selectedWithOtherParams = new Set([...selected, ...[age, activity, category, when, where, company].filter((item) => item !== '')]);
+    const selectedWithOtherParams = new Set([...selected, ...[age, category, when, where, company].filter((item) => item !== '')]);
 
     return markers.filter(({criteria}) => {
       let everyThingFound = true;
@@ -61,11 +60,10 @@ const App = () => {
       });
       return everyThingFound
     })
-  }, [selected, activity, age, when, where, category, company])
+  }, [selected, age, when, where, category, company])
 
   const resetInitialSettings = useCallback(() => {
     setIsChoiceOpen(true);
-    setActivity(undefined);
     setCategory(undefined);
     setWhen(undefined);
     setWhere(undefined);
@@ -78,12 +76,12 @@ const App = () => {
       company === undefined ? <SelectCompanyPage selectCompany={setCompany}/> :
       when === undefined ? <SelectWhenPage selectWhen={setWhen}/> :
       where === undefined ? <SelectWherePage selectWhere={setWhere}/> :
-      category === undefined ? <SelectCategoryPage selectCategory={setCategory}/> :
-      isChoiceOpen ? <SelectActivityPage selectActivity={setActivity} setIsChoiceOpen={(open) => {setIsChoiceOpen(open)}}/> : ''}
+      isChoiceOpen ? <SelectCategoryPage selectCategory={setCategory} setIsChoiceOpen={(open) => {setIsChoiceOpen(open)}}/> : ''}
       <div className={'App'}>
-        <Menu resetInitial={resetInitialSettings} initSettings={{age, company, when, where, category, activity}}/>
+        <Menu resetInitial={resetInitialSettings} initSettings={{age, company, when, where, category}}/>
         <ActivitiesList activeMarkers={activeMarkers}/>
         <Map activeMarkers={activeMarkers}/>
+        <div style={{width: '350px', height: '30px', position: 'absolute', right: 0, bottom: 0, zIndex: 9999, background: 'white'}}></div>
       </div>
     </Markers.Provider>
   );

@@ -5,7 +5,6 @@ import Card from "./card.component";
 
 const SelectWhenPage = ({selectWhen}) => {
   const [appear, setAppear] = useState(false);
-  const [buttonsActive, setButtonsActive] = useState(true);
 
   useEffect(() => {
     setTimeout(() => {
@@ -14,7 +13,6 @@ const SelectWhenPage = ({selectWhen}) => {
   }, []);
 
   const onClickHandle = useCallback((when) => () => {
-    setButtonsActive(false);
     setAppear(false);
     setTimeout(() => {
       selectWhen(when)
@@ -62,7 +60,7 @@ const SelectWhenPage = ({selectWhen}) => {
         }}
       >
         <Card
-          onClick={onClickHandle(options.when.title)}
+          onClick={onClickHandle(options.when.afternoon.title)}
           title={options.when.afternoon.title}
           imageUrl={options.when.afternoon.imgUrl}
           backgroundColor={options.when.afternoon.bgColor}

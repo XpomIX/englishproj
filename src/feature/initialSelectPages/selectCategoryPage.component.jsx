@@ -1,10 +1,10 @@
 import './initialSelect.css';
-import {useCallback, useEffect, useMemo, useState} from "react";
-import {ageIconsOptions, options} from "./options";
+import {useCallback, useEffect, useState} from "react";
+import {options} from "./options";
 import './card.css';
 import Card from "./card.component";
 
-const SelectCategoryPage = ({selectCategory}) => {
+const SelectCategoryPage = ({selectCategory, setIsChoiceOpen}) => {
   const [appear, setAppear] = useState(false);
   const [buttonsActive, setButtonsActive] = useState(true);
 
@@ -20,12 +20,13 @@ const SelectCategoryPage = ({selectCategory}) => {
       setAppear(false);
       setTimeout(() => {
         selectCategory(gender)
+        setIsChoiceOpen(false)
       }, 300);
     }
-  }, [selectCategory, buttonsActive])
+  }, [selectCategory, buttonsActive, setIsChoiceOpen])
 
   return (
-    <div className={'page'}>
+    <div className={'page'} style={appear ? {opacity: 1, transition: '0s'} : {opacity: 0}}>
       <div
         style={{
           display: "flex",
