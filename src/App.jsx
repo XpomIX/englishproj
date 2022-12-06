@@ -50,7 +50,8 @@ const App = () => {
   }, [selected, setSelected])
 
   const activeMarkers = useMemo(() => {
-    const selectedWithOtherParams = new Set([...selected, ...[age, category, activity, when, where, company].filter((item) => item !== '')]);
+    const newCategory = category === 'company' ? '' : category;
+    const selectedWithOtherParams = new Set([...selected, ...[age, newCategory, activity, when, where, company ?? ''].filter((item) => item !== '')]);
 
     return markers.filter(({criteria}) => {
       let everyThingFound = true;
@@ -67,6 +68,7 @@ const App = () => {
     setIsChoiceOpen(true);
     setCategory(undefined);
     setActivity(undefined);
+    setCompany(undefined);
     setWhen(undefined);
     setWhere(undefined);
     setAge(undefined);
@@ -75,13 +77,13 @@ const App = () => {
   return (
     <Markers.Provider value={{hoverMarkerId, updateHoverMarkerId, selected, onChangeCategory, setMapCenter: changeMapCenter, mapCenter}}>
       {age === undefined ? <SelectAgePage selectAge={setAge}/> :
-      company === undefined ? <SelectCompanyPage selectCompany={setCompany}/> :
       when === undefined ? <SelectWhenPage selectWhen={setWhen}/> :
       where === undefined ? <SelectWherePage selectWhere={setWhere}/> :
       category === undefined ? <SelectCategoryPage selectCategory={setCategory}/> :
+      category === 'company' && company === undefined ? <SelectCompanyPage selectCompany={setCompany}/> :
       isChoiceOpen ? <SelectActivityPage selectActivity={setActivity} setIsChoiceOpen={(open) => {setIsChoiceOpen(open)}}/> : ''}
       <div className={'App'}>
-        <Menu resetInitial={resetInitialSettings} initSettings={{age, company, when, where, category, activity}}/>
+        <Menu changeMapCenter={changeMapCenter} resetInitial={resetInitialSettings} activeMarkers={activeMarkers} initSettings={{age, company: company ?? '', when, where, category, activity}}/>
         <ActivitiesList activeMarkers={activeMarkers}/>
         <Map activeMarkers={activeMarkers}/>
         <div style={{width: '350px', height: '30px', position: 'absolute', right: 0, bottom: 0, zIndex: 9999, background: 'white'}}></div>

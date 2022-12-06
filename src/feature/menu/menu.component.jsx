@@ -1,13 +1,18 @@
 import 'leaflet/dist/leaflet.css';
 import './menu.css';
-import {Chip, IconButton, Typography} from "@mui/material";
-import {useContext, useMemo} from "react";
+import {Button, Chip, IconButton, Typography} from "@mui/material";
+import {useCallback, useContext, useMemo} from "react";
 import {Markers} from "../../App";
 import {categories} from "../../categories";
 import RestartAltIcon from '@mui/icons-material/RestartAlt';
 
-const Menu = ({resetInitial, initSettings}) => {
+const Menu = ({resetInitial, initSettings, activeMarkers, changeMapCenter}) => {
   const {selected, onChangeCategory} = useContext(Markers);
+
+  const choiceRandom = useCallback(() => {
+    const randomMarker = activeMarkers[Math.floor(Math.random() * activeMarkers.length)]
+    changeMapCenter(randomMarker.position)
+  }, [activeMarkers, changeMapCenter])
 
   const menuItems = useMemo(() => (
     categories.map(({title, criteria}) => (
@@ -31,6 +36,8 @@ const Menu = ({resetInitial, initSettings}) => {
     return <>{result.map((item) => item)}</>
   }, [initSettings]);
 
+
+
   return (
     <div className={'menu'}>
       <Typography variant="h5" gutterBottom>
@@ -46,6 +53,7 @@ const Menu = ({resetInitial, initSettings}) => {
       {/*<div className={'menu-content'}>*/}
       {/*  {menuItems}*/}
       {/*</div>*/}
+      <Button onClick={choiceRandom} variant={'contained'} sx={{width: '100%', fontSize: '18px'}}>TRY YOUR LUCK</Button>
     </div>
   )
 }
