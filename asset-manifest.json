@@ -1,8 +1,12 @@
 {
   "files": {
     "main.css": "/englishproj/static/css/main.7974cad0.css",
-    "main.js": "/englishproj/static/js/main.f459f35e.js",
+    "main.js": "/englishproj/static/js/main.4f32bbf7.js",
     "static/media/act-2.jpg": "/englishproj/static/media/act-2.d86f99428030f61076ca.jpg",
+    "static/media/whatsapp-image-2021-10-11-at-15.03.13-2.jpeg": "/englishproj/static/media/whatsapp-image-2021-10-11-at-15.03.13-2.9bfc984068e1b3f70fcc.jpeg",
+    "static/media/whatsapp-image-2021-10-11-at-15.08.50-1 (1).jpeg": "/englishproj/static/media/whatsapp-image-2021-10-11-at-15.08.50-1 (1).11da9e4f0378c7f6d25b.jpeg",
+    "static/media/whatsapp-image-2021-10-11-at-15.08.50-1.jpeg": "/englishproj/static/media/whatsapp-image-2021-10-11-at-15.08.50-1.11da9e4f0378c7f6d25b.jpeg",
+    "static/media/whatsapp-image-2021-10-11-at-15.08.50-2.jpeg": "/englishproj/static/media/whatsapp-image-2021-10-11-at-15.08.50-2.a68da6356e8653a938ad.jpeg",
     "static/media/age-1.jpg": "/englishproj/static/media/age-1.706a9f386faaaa9b459c.jpg",
     "static/media/age-3.jpg": "/englishproj/static/media/age-3.2841a031bf0107da2dec.jpg",
     "static/media/typeOfCompanies-1.jpg": "/englishproj/static/media/typeOfCompanies-1.b55d0f106aad1acfe13a.jpg",
@@ -20,15 +24,14 @@
     "static/media/when-2.jpg": "/englishproj/static/media/when-2.adbed873b4abbf53824e.jpg",
     "static/media/typeOfCompanies-3.jpg": "/englishproj/static/media/typeOfCompanies-3.3af0fbb77a7290e99ce9.jpg",
     "static/media/typeOfCompanies-2.jpg": "/englishproj/static/media/typeOfCompanies-2.ba71f7b12216af421561.jpg",
-    "static/media/restaurant.png": "/englishproj/static/media/restaurant.6e77eefba3cfa6b8e699.png",
     "static/media/marker.svg": "/englishproj/static/media/marker.cf3b4135bd5ce23e5eb06074760cf91f.svg",
     "static/media/markerChosen.svg": "/englishproj/static/media/markerChosen.00404c21a623b038862c7c177ac352c3.svg",
     "index.html": "/englishproj/index.html",
     "main.7974cad0.css.map": "/englishproj/static/css/main.7974cad0.css.map",
-    "main.f459f35e.js.map": "/englishproj/static/js/main.f459f35e.js.map"
+    "main.4f32bbf7.js.map": "/englishproj/static/js/main.4f32bbf7.js.map"
   },
   "entrypoints": [
     "static/css/main.7974cad0.css",
-    "static/js/main.f459f35e.js"
+    "static/js/main.4f32bbf7.js"
   ]
 }
