@@ -40,12 +40,12 @@ const Menu = ({resetInitial, initSettings}) => {
         {initSettingsRender}
       </div>
       <div style={{width: '100%', marginTop: '25px'}}></div>
-      <Typography variant="h5" gutterBottom>
-        Choose your criteria
-      </Typography>
-      <div className={'menu-content'}>
-        {menuItems}
-      </div>
+      {/*<Typography variant="h5" gutterBottom>*/}
+      {/*  Choose your criteria*/}
+      {/*</Typography>*/}
+      {/*<div className={'menu-content'}>*/}
+      {/*  {menuItems}*/}
+      {/*</div>*/}
     </div>
   )
 }

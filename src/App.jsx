@@ -30,6 +30,7 @@ const App = () => {
   const [when, setWhen] = useState(undefined);
   const [where, setWhere] = useState(undefined);
   const [isChoiceOpen, setIsChoiceOpen] = useState(true);
+  const [activity, setActivity] = useState(undefined);
 
   const [mapCenter, setMapCenter] = useState([]);
 
@@ -49,7 +50,7 @@ const App = () => {
   }, [selected, setSelected])
 
   const activeMarkers = useMemo(() => {
-    const selectedWithOtherParams = new Set([...selected, ...[age, category, when, where, company].filter((item) => item !== '')]);
+    const selectedWithOtherParams = new Set([...selected, ...[age, category, activity, when, where, company].filter((item) => item !== '')]);
 
     return markers.filter(({criteria}) => {
       let everyThingFound = true;
@@ -60,11 +61,12 @@ const App = () => {
       });
       return everyThingFound
     })
-  }, [selected, age, when, where, category, company])
+  }, [selected, age, when, activity, where, category, company])
 
   const resetInitialSettings = useCallback(() => {
     setIsChoiceOpen(true);
     setCategory(undefined);
+    setActivity(undefined);
     setWhen(undefined);
     setWhere(undefined);
     setAge(undefined);
@@ -76,9 +78,10 @@ const App = () => {
       company === undefined ? <SelectCompanyPage selectCompany={setCompany}/> :
       when === undefined ? <SelectWhenPage selectWhen={setWhen}/> :
       where === undefined ? <SelectWherePage selectWhere={setWhere}/> :
-      isChoiceOpen ? <SelectCategoryPage selectCategory={setCategory} setIsChoiceOpen={(open) => {setIsChoiceOpen(open)}}/> : ''}
+      category === undefined ? <SelectCategoryPage selectCategory={setCategory}/> :
+      isChoiceOpen ? <SelectActivityPage selectActivity={setActivity} setIsChoiceOpen={(open) => {setIsChoiceOpen(open)}}/> : ''}
       <div className={'App'}>
-        <Menu resetInitial={resetInitialSettings} initSettings={{age, company, when, where, category}}/>
+        <Menu resetInitial={resetInitialSettings} initSettings={{age, company, when, where, category, activity}}/>
         <ActivitiesList activeMarkers={activeMarkers}/>
         <Map activeMarkers={activeMarkers}/>
         <div style={{width: '350px', height: '30px', position: 'absolute', right: 0, bottom: 0, zIndex: 9999, background: 'white'}}></div>

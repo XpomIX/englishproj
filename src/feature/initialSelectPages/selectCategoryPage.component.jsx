@@ -4,7 +4,7 @@ import {options} from "./options";
 import './card.css';
 import Card from "./card.component";
 
-const SelectCategoryPage = ({selectCategory, setIsChoiceOpen}) => {
+const SelectCategoryPage = ({selectCategory}) => {
   const [appear, setAppear] = useState(false);
   const [buttonsActive, setButtonsActive] = useState(true);
 
@@ -20,13 +20,12 @@ const SelectCategoryPage = ({selectCategory, setIsChoiceOpen}) => {
       setAppear(false);
       setTimeout(() => {
         selectCategory(gender)
-        setIsChoiceOpen(false)
       }, 300);
     }
-  }, [selectCategory, buttonsActive, setIsChoiceOpen])
+  }, [selectCategory, buttonsActive])
 
   return (
-    <div className={'page'} style={appear ? {opacity: 1, transition: '0s'} : {opacity: 0}}>
+    <div className={'page'}>
       <div
         style={{
           display: "flex",
