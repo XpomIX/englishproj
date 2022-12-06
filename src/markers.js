@@ -147,7 +147,7 @@ export const markers = [
     address: `Russia, Tyumen city, Lenina street, 68/101`
   },
   {
-    title: `Bar "Mr. Hookah�`,
+    title: `Bar "Mr. Hookah"`,
     description: `A great place in the city center. Delicious varied menu and excellent hookah! The staff is attentive.`,
     position: [57.15734,65.53061],
     rating: 4.6,
