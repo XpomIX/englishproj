@@ -11,7 +11,22 @@ const ActivitiesList = ({activeMarkers}) => {
           <Fragment>
             <img alt={''} src={'https://netsh.pp.ua/wp-content/uploads/2017/08/Placeholder-1.png'} style={{width: '300px', height: '200px'}}/>
             <Box><Typography style={{fontSize: '24px'}}>{title}</Typography>
-              <Rating name="half-rating-read" defaultValue={rating} precision={0.1} readOnly /></Box>
+              <Box
+                sx={{
+                  width: 200,
+                  display: 'flex',
+                  alignItems: 'center',
+                }}
+              >
+                <Rating
+                  name="half-rating-read"
+                  defaultValue={rating}
+                  precision={0.1}
+                  readOnly
+                />
+                <Box sx={{ ml: 2, fontSize: '16px' }}>{rating}</Box>
+              </Box>
+            </Box>
             <div style={{fontSize: '20px'}}>{description}</div>
             <Button variant={'contained'} onClick={() => setMapCenter(position)}>See on the map</Button>
           </Fragment>
@@ -40,7 +55,7 @@ const ActivitiesList = ({activeMarkers}) => {
       <Typography variant="h5" gutterBottom>
         Activities by criteria ({activitiesLength})
       </Typography>
-      <div>
+      <div style={{height: '-webkit-fill-available', overflowY: 'auto', padding: '15px'}}>
         {activitiesBody}
       </div>
     </div>
