@@ -9,6 +9,8 @@
     border-right: solid 2px #a9a9a9;
     padding: 20px;
     box-sizing: border-box;
+    max-height: 100%;
+    overflow: hidden;
 }
 .activities-list-item {
     border-radius: 5px;
@@ -16,7 +18,15 @@
     padding: 6px;
     cursor: pointer;
     transition: 0.1s;
+    height: 140px;
+    background: rgba(150,107,214,0.49);
+    color: black;
 }
+.activities-list-item:hover {
+    background: #966BD6;
+    color: white;
+}
+
 .activities-list-item__title {
     font-size: 18px;
     font-weight: bold;
